@@ -17,9 +17,11 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useUser } from "@clerk/nextjs";
 import { createClient } from "../../../utils/supabase/client";
+import { useRouter } from "next/navigation";
 
 const AddNewInterview = () => {
   const { user } = useUser();
+  const router = useRouter();
   const supabase = createClient();
   const [openDialog, setOpenDialog] = useState(false);
   const [jobPosition, setJobPosition] = useState("");
@@ -64,6 +66,7 @@ const AddNewInterview = () => {
 
         if(data) {
           setOpenDialog(false)
+          router.push(`/dashboard/interview/${data.mockId}`)
         }
 
       console.log("Insert Id => ", data);
