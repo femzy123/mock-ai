@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Interview } from "@/utils/types";
 import { Lightbulb, WebcamIcon } from "lucide-react";
+import Link from "next/link";
 import React, { useState } from "react";
 import Webcam from "react-webcam";
 
@@ -59,7 +60,7 @@ const InterviewClient = ({ interviewData }: Props) => {
             <>
               <WebcamIcon className="h-72 w-full p-20 bg-secondary rounded" />
               <Button
-              variant="ghost"
+                variant="ghost"
                 onClick={() => setWebcamEnabled(true)}
                 className="w-full mt-4"
               >
@@ -70,7 +71,9 @@ const InterviewClient = ({ interviewData }: Props) => {
         </div>
       </div>
       <div className="flex justify-end">
-        <Button>Start Interview</Button>
+        <Link href={`/dashboard/interview/${interviewData.mockId}/start`}>
+          <Button>Start Interview</Button>
+        </Link>
       </div>
     </div>
   );
