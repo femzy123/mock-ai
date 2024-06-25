@@ -41,6 +41,9 @@ dependencies:
   react-dom:
     specifier: ^18
     version: 18.0.0(react@18.0.0)
+  react-hook-speech-to-text:
+    specifier: ^0.8.0
+    version: 0.8.0(react-dom@18.0.0)(react@18.0.0)
   react-webcam:
     specifier: ^7.2.0
     version: 7.2.0(react-dom@18.0.0)(react@18.0.0)
@@ -2748,6 +2751,16 @@ packages:
       loose-envify: 1.4.0
       react: 18.0.0
       scheduler: 0.21.0
+    dev: false
+
+  /react-hook-speech-to-text@0.8.0(react-dom@18.0.0)(react@18.0.0):
+    resolution: {integrity: sha512-hct4gF0Wesn79Pfg+t2PDCa7n0rfSKdzXI4uxq6A5awwUZZG58T67mJNjZDD9Hu9O+6E1Nk5ZpuIPdDLk1fqmw==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      react: 18.0.0
+      react-dom: 18.0.0(react@18.0.0)
     dev: false
 
   /react-is@16.13.1:

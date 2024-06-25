@@ -1,4 +1,4 @@
-import { Lightbulb } from "lucide-react";
+import { Lightbulb, Volume2 } from "lucide-react";
 
 interface MockQuestions {
   question: string;
@@ -14,6 +14,16 @@ const QuestionsSection = ({
   mockInterviewQuestions,
   activeQuestionIndex,
 }: Props) => {
+
+  const textToSpeech = (text: string) => {
+    if('speechSynthesis' in window) {
+      const speech = new SpeechSynthesisUtterance(text);
+      window.speechSynthesis.speak(speech)
+    } else {
+      alert('Sorry. your browser does not support text to speech')
+    }
+  }
+
   return (
     <div className="p-5 border rounded-lg my-10">
       <div className="grid grid-col-2 md:grid-cols-3 gap-4">
@@ -33,6 +43,8 @@ const QuestionsSection = ({
       <p className="my-4 text-sm md:text-lg">
         {mockInterviewQuestions[activeQuestionIndex].question}
       </p>
+
+      <Volume2 className="cursor-pointer" onClick={() => textToSpeech(mockInterviewQuestions[activeQuestionIndex].question)} />
 
       <div className="mt-20 border rounded-lg p-5 bg-blue-100 text-primary">
         <p className="flex gap-2 items-center text-sm">
