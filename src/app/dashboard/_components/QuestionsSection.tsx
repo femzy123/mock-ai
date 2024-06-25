@@ -1,9 +1,6 @@
+import { MockQuestions } from "@/utils/types";
 import { Lightbulb, Volume2 } from "lucide-react";
 
-interface MockQuestions {
-  question: string;
-  answer: string;
-}
 
 type Props = {
   mockInterviewQuestions: MockQuestions[];

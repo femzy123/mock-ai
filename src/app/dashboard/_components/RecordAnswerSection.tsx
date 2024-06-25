@@ -5,11 +5,20 @@ import { Mic, WebcamIcon } from "lucide-react";
 import Webcam from "react-webcam";
 import useSpeechToText from "react-hook-speech-to-text";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { MockQuestions } from "@/utils/types";
+import { chatSession } from "@/utils/GeminiAiModal";
 
-type Props = {};
+type Props = {
+  mockInterviewQuestions: MockQuestions[];
+  activeQuestionIndex: number;
+};
 
-const RecordAnswerSection = (props: Props) => {
-  const [userAnswer, setUserAnswer] = useState('')
+const RecordAnswerSection = ({
+  mockInterviewQuestions,
+  activeQuestionIndex,
+}: Props) => {
+  const [userAnswer, setUserAnswer] = useState("");
   const {
     error,
     interimResult,
@@ -23,11 +32,37 @@ const RecordAnswerSection = (props: Props) => {
   });
 
   useEffect(() => {
-    results.map((result: any) => (
-      setUserAnswer(prevAns => prevAns + result.transcript)
-    ))
-  }, [results])
-  
+    results.map((result: any) =>
+      setUserAnswer((prevAns) => prevAns + result.transcript)
+    );
+  }, [results]);
+
+  const saveUserAnswer = async () => {
+    if (isRecording) {
+      stopSpeechToText();
+      if (userAnswer.length < 10) {
+        toast.error("Error while saving your answer.", {
+          description: "Please record again!",
+        });
+        return;
+      }
+
+      const feedbackPrompt = `Question: ${mockInterviewQuestions[activeQuestionIndex].question}, User Answer: ${userAnswer}, depends on question and user answer for each interview question, please give us rating and feedback and area of imporvement in just 3 to 5 lines to improve it in json format with rating field and feedback field`;
+
+      const result = await chatSession.sendMessage(feedbackPrompt)
+
+      const mockJsonResponse = result.response
+        .text()
+        .replace("```json", "")
+        .replace("```", "");
+
+        console.log(mockJsonResponse)
+
+        const jsonFeedback = JSON.parse(mockJsonResponse)
+    } else {
+      startSpeechToText();
+    }
+  };
 
   return (
     <div className="flex flex-col items-center gap-10">
@@ -42,16 +77,15 @@ const RecordAnswerSection = (props: Props) => {
           }}
         />
       </div>
-      <Button
-        onClick={isRecording ? stopSpeechToText : startSpeechToText}
-        variant="outline"
-      >
+      <Button onClick={saveUserAnswer} variant="outline">
         {isRecording ? (
           <span className="text-red-600 flex gap-2">
             <Mic /> Recording...
           </span>
         ) : (
-          "Record Answer"
+          <span className="text-primary flex gap-2">
+            <Mic /> Record Answer
+          </span>
         )}
       </Button>
 

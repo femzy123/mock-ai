@@ -6,3 +6,8 @@ export interface Interview {
   jobExperience: string;
   createdBy: string;
 }
+
+export interface MockQuestions {
+  question: string;
+  answer: string;
+}

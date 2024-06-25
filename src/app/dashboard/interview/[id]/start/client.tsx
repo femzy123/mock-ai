@@ -22,7 +22,10 @@ const StartInterviewClient = ({ interviewData }: Props) => {
           activeQuestionIndex={activeQuestionIndex}
         />
         {/* Video/Audio Recording */}
-        <RecordAnswerSection />
+        <RecordAnswerSection
+          mockInterviewQuestions={mockInterviewQuestions}
+          activeQuestionIndex={activeQuestionIndex}
+        />
       </div>
     </div>
   );
