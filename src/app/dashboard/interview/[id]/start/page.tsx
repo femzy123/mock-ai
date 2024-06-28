@@ -11,6 +11,10 @@ const StartInterview = async ({params}: any) => {
     .select("*")
     .eq("mockId", id);
 
+    if (error) {
+      console.log(error)
+    }
+
 
   return (
     <StartInterviewClient interviewData={data![0]} />

@@ -22,7 +22,7 @@ const QuestionsSection = ({
   }
 
   return (
-    <div className="p-5 border rounded-lg my-10">
+    <div className="p-5 border rounded-lg mt-10">
       <div className="grid grid-col-2 md:grid-cols-3 gap-4">
         {mockInterviewQuestions.map((question, index) => (
           <div

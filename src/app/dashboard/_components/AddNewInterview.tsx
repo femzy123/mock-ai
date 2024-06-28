@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { chatSession } from "@/utils/GeminiAiModal";
 import { Loader2Icon } from "lucide-react";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useUser } from "@clerk/nextjs";
 import { createClient } from "../../../utils/supabase/client";
@@ -30,7 +30,7 @@ const AddNewInterview = () => {
   const [loading, setLoading] = useState(false);
   const [jsonMockResp, setJsonMockResp] = useState([]);
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
@@ -42,7 +42,6 @@ const AddNewInterview = () => {
       .replace("```json", "")
       .replace("```", "");
     // console.log(JSON.parse(mockJsonResponse));
-    setJsonMockResp(mockJsonResponse);
 
     if (mockJsonResponse) {
       const { data, error } = await supabase
@@ -54,7 +53,7 @@ const AddNewInterview = () => {
             jobPosition,
             jobDesc: jobDescription,
             jobExperience,
-            createdBy: user.primaryEmailAddress.emailAddress,
+            createdBy: user?.primaryEmailAddress?.emailAddress,
           },
         ])
         .select("mockId");
