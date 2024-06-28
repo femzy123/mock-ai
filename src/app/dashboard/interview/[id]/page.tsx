@@ -2,7 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import InterviewClient from './InterviewClient'
 import { Interview } from "@/utils/types";
 
-const InterviewPage = async ({ params }: any) => {
+const InterviewPage = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
   const supabase = createClient();
 
@@ -11,9 +11,7 @@ const InterviewPage = async ({ params }: any) => {
     .select("*")
     .eq("mockId", id);
 
-  return (
-    <InterviewClient interviewData={data![0] as Interview} />
-  );
+  return <InterviewClient interviewData={data![0] as Interview} />;
 };
 
 export default InterviewPage;
