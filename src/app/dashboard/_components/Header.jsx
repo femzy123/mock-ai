@@ -3,7 +3,7 @@
 import { UserButton } from '@clerk/nextjs';
 import Image from 'next/image'
 import { usePathname } from 'next/navigation';
-import React from 'react'
+import Link from 'next/link';
 
 const Header = () => {
   const path = usePathname()
@@ -16,7 +16,7 @@ const Header = () => {
             path === "/dashboard" && "text-primary font-semibold"
           }`}
         >
-          Dashboard
+          <Link href="/dashboard">Dashboard</Link>
         </li>
         <li
           className={`hover:text-primary hover:font-semibold transition-all cursor-pointer ${

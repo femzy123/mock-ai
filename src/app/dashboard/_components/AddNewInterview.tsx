@@ -56,18 +56,16 @@ const AddNewInterview = () => {
             createdBy: user?.primaryEmailAddress?.emailAddress,
           },
         ])
-        .select("mockId");
+        .select();
 
-        if(error) {
-          alert("Something went wrong with saving data")
-        }
+      if (error) {
+        alert("Something went wrong with saving data");
+      }
 
-        if(data) {
-          setOpenDialog(false)
-          router.push(`/dashboard/interview/${data.mockId}`)
-        }
-
-      console.log("Insert Id => ", data);
+      if (data) {
+        setOpenDialog(false);
+        router.push(`/dashboard/interview/${data[0]?.mockId}`);
+      }
     }
 
     setLoading(false);
