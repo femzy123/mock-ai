@@ -9,7 +9,7 @@ const Header = () => {
   const path = usePathname()
   return (
     <div className="flex items-center justify-between p-4 bg-secondary shadow-sm">
-      <Image src={"/logo.svg"} width={160} height={100} alt="logo" />
+      <Image src={"/logo.png"} width={160} height={100} alt="logo" />
       <ul className="hidden md:flex gap-6 text-xs">
         <li
           className={`hover:text-primary hover:font-semibold transition-all cursor-pointer ${

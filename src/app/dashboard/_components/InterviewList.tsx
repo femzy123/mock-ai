@@ -11,6 +11,7 @@ const InterviewList = () => {
   const { user } = useUser();
   const supabase = createClient();
   const [interviewList, setInterviewList] = useState<Interview[]>([]);
+  console.log(user)
 
   const getInterviewList = async () => {
     const { data, error } = await supabase
